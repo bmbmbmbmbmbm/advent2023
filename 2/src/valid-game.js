@@ -13,9 +13,7 @@ function validRound(red, green, blue, round) {
 
 function validGame(red, green, blue, game) {
     validInputs(red, green, blue, game)
-    const result = !game.some(round => validRound(red, green, blue, round))
-    console.log(result)
-    return result
+    return !game.some(round => validRound(red, green, blue, round))
 }
 
 module.exports = {
