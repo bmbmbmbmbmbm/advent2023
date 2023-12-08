@@ -1,6 +1,7 @@
 const { readFile } = require('../1/src/file-reader')
 const { gameAsObject } = require('./src/game-list')
 const { validGame } = require('./src/valid-game')
+const { cubesNeeded } = require('./src/cubes-needed')
 
 const file = 'input.txt'
 
@@ -16,10 +17,15 @@ function problem1(games) {
     )
 }
 
+function problem2(games) {
+    return games.reduce((acc, game) => acc + cubesNeeded(game), initial)
+}
+
 function main() {
     const list = readFile(file)
     const games = gameAsObject(list)
     console.log('pt1: ', problem1(games))
+    console.log('pt2: ', problem2(games))
 }
 
 main()

@@ -19,6 +19,12 @@ function getRoundObject(round) {
     return roundObject.apply(this, values)
 }
 
+/**
+ * Takes a string series of games and puts them into a list of games, each game 
+ * is a lit of rounds, and a round is an object with red, green, blue number values
+ * @param {String[]} list 
+ * @returns {Object[]}
+ */
 function gameAsObject(list) {
     const games = list.map((game, index) => {
         const rounds = game.replace(`Game ${index + 1}: `, '').split('; ')
