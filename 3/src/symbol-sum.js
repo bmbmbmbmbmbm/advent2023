@@ -1,39 +1,46 @@
-const symbolRegex = /[^1-9.]/
 
-function calculateLine(line, index) {
-
-    if(symbolRegex.test(line)) {
-        return 0;
-    }
-
-    const symbolIndex = symbolRegex.exec(line).index
-    const numberRegex = /\d+/
-    let value = 0;
-    for(let i = index - 1; i < index + 2; ++i) {
-        if(!list[i]) continue
-        if(numberRegex.test(list[i])) {
-            const value = numberRegex.exec(list[i])[0]
-            
-        }
-    }
-    return value
+function getRidOf(string) {
+    if (typeof string !== 'string') throw new Error('Uh oh it is not a string')
+    return string.split('').map(() => '.').join('')
 }
 
-function findSymbolLines(list) {
-    const symbolLines = [];
-    list.forEach((line, index) => { 
-        if(symbolRegex.test(line)) {
-            symbolLines.push({line, index})
-        } 
-    })
-    return symbolLines;
+function getValidNumber(line, index) {
+    const numberRegex = /[0-9]+/
+    let total = 0;
+    let lineCopy = line;
+
+    while (numberRegex.test(lineCopy)) {
+        const result = numberRegex.exec(lineCopy)
+        const start = result.index - 1
+        const end = result.index + result[0].length
+        if (index >= start && index <= end) {
+            total += Number.parseInt(result[0])
+        }
+
+        lineCopy = lineCopy.replace(result[0], getRidOf(result[0]))
+    }
+
+    return total;
+}
+
+function findLineValue(line, index, list) {
+    const symbolRegex = /[^0-9.]/
+    let lineCopy = line;
+    let total = 0;
+    while (symbolRegex.test(lineCopy)) {
+        const result = symbolRegex.exec(lineCopy)
+        for (let i = -1; i < 2; ++i) {
+            if (index + i === list.length || index + i === -1) continue
+            total += getValidNumber(list[index + i], result.index)
+        }
+        lineCopy = lineCopy.replace(result[0], getRidOf(result[0]))
+    }
+    return total
 }
 
 function calculateSum(list) {
-    const symbolLines = findSymbolLines(list)
-    symbolLines.forEach(line => {
-        
-    })  
+    const initial = 0
+    return list.reduce((acc, line, index) => acc + findLineValue(line, index, list), initial)
 }
 
 module.exports = {
