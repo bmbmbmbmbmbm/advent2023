@@ -53,7 +53,6 @@ function findLast(line) {
 function parseLine(line) {
     const first = findFirst(line)
     const last = findLast(first)
-    console.log({line, first, last})
     return calculate(last)
 }
 

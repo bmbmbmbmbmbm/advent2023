@@ -1,4 +1,4 @@
-const { readFile } = require('../1/src/file-reader')
+const { readFile } = require('../resources/file-reader')
 const { gameAsObject } = require('./src/game-list')
 const { validGame } = require('./src/valid-game')
 const { calculatePower } = require('./src/cubes-needed')

@@ -1,9 +1,9 @@
-const { readFile } = require('./src/file-reader')
+const { readFile } = require('../resources/file-reader')
 const { calculate } = require('./src/line-calculator')
 const { parseLine } = require('./src/line-parser')
 
 const file = 'input.txt'
-const initial = 0;
+const initial = 0
 
 function problem1(list) {
     const total = list.reduce((acc, line) => acc + calculate(line), initial)

@@ -2,7 +2,7 @@ function firstDigit(line) {
     if(typeof line !== "string") throw new Error('Not a string')
     const regex = /\d/
     const result = regex.exec(line)
-    return result ? result[0] : 0
+    return result ? result[0] : '0'
 }
 
 function lastDigit(line) {
